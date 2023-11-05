@@ -2,6 +2,7 @@ import { Inter } from 'next/font/google'
 import '../public/globals.css'
 import '../public/material-dashboard.min.css'
 import Navbar from "@/app/components/Navbar";
+import React from "react";
 
 const inter = Inter({ subsets: ['latin'] })
 export default function RootLayout({
@@ -18,7 +19,7 @@ export default function RootLayout({
                 <title>Home</title>
             </head>
             <body className={'mt-5'} style={{
-                backgroundImage: "background: url(https://unsplash.com/?photo=vZlTg_McCDo)",
+                backgroundImage: "url(https://source.unsplash.com/vZlTg_McCDo/1600x900)",
                 backgroundSize: "cover",
             }}>
                 <Navbar />

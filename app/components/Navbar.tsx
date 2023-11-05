@@ -1,7 +1,7 @@
 import Link from "next/link";
 export default function Navbar() {
     return (
-        <nav className={"navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top mb-5 position-sticky rounded-lg"}>
+        <nav className={"navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top mb-5 position-sticky rounded-lg backdrop-blur-lg"}>
             <div className={"container-fluid"}>
                 <div className={"navbar-wrapper"}>
                     <Link href={"/"} className={"navbar-brand"}> Home </Link>
