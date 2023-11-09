@@ -18,8 +18,9 @@ export default function NewExpense() {
 				category: category.value
 			})
 		})
-		const data = await response.json()
-		console.log(data)
+		const data = await response.json().then(
+			() => window.location.href = '/expenses'
+		)
 	}
 	
 	return (
