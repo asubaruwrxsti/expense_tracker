@@ -9,7 +9,7 @@ export default function NewExpense() {
 		const description = form.querySelector('#description') as HTMLInputElement
 		const amount = form.querySelector('#amount') as HTMLInputElement
 		const category = form.querySelector('#category') as HTMLInputElement
-		const response = await fetch('/api/expenses/new', {
+		await fetch('/api/expenses/new', {
 			method: 'POST',
 			body: JSON.stringify({
 				name: name.value,
@@ -17,10 +17,13 @@ export default function NewExpense() {
 				amount: amount.value,
 				category: category.value
 			})
+		}).then((response) => {
+			if (response) {
+				window.location.href = '/expenses'
+			}
+		}).catch((error) => {
+			console.log(error)
 		})
-		const data = await response.json().then(
-			() => window.location.href = '/expenses'
-		)
 	}
 	
 	return (
