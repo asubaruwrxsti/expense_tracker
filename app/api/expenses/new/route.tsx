@@ -1,9 +1,5 @@
 import prisma from '@/prisma/db';
-import {TodoistApi} from "@doist/todoist-api-typescript"
-
-const api = new TodoistApi(
-	process.env.TODOIST_API_TOKEN as string
-);
+import todoist from '@/todoist/todoist';
 
 export async function POST(request: Request) {
 	const body = await request.json();
@@ -17,7 +13,7 @@ export async function POST(request: Request) {
 			categoriesId: 1,
 		}
 	}).then(async (expense) => {
-		const current_description = await api.getTask(process.env.TODOIST_TASK_ID as string).then(
+		const current_description = await todoist.getTask(process.env.TODOIST_TASK_ID as string).then(
 			(task) => task.description
 		)
 
@@ -27,7 +23,7 @@ export async function POST(request: Request) {
 		let new_description = `Name: ${expense.name}\nDescription: ${expense.description}\nAmount: ${expense.amount}`;
 		new_description += `\n\n${current_description}`;
 
-		const response = await api.updateTask(
+		const response = await todoist.updateTask(
 			process.env.TODOIST_TASK_ID as string,
 			{
 				content: `${date}`,
@@ -37,29 +33,5 @@ export async function POST(request: Request) {
 		return new Response(JSON.stringify(response));
 	}).catch((error) => {
 		return new Response(JSON.stringify(error));
-	});
-}
-
-export async function GET() {
-	let today = new Date();
-	const date = `${today.getDate()} ${today.toLocaleString('default', { month: 'short' })} ${today.getFullYear()}`;
-	
-	await prisma.expense.findMany({
-		where: {
-			createdAt: {
-				gte: new Date(today.getFullYear(), today.getMonth(), today.getDate())
-			}
-		}
-	}).then(async (expenses) => {
-		if (expenses.length === 0) {
-			await api.updateTask(
-				process.env.TODOIST_TASK_ID as string,
-				{
-					content: `${date}`,
-				}
-			)
-			return new Response(JSON.stringify([]));
-		}
-		return new Response(JSON.stringify(expenses));
 	});
 }
