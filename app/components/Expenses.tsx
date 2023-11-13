@@ -1,9 +1,11 @@
 import prisma from "@/prisma/db";
 import Link from "next/link";
+import ExpenseChart from "@/app/components/ExpenseChart";
 
 export default async function Expenses() {
 	return (
 		<>
+			<ExpenseChart />
 			<h5>Expenses</h5>
 			<div className={'expenses d-flex flex-wrap justify-content-left'}>
 				{await prisma.expense.findMany().then((expenses) => {
