@@ -1,10 +1,5 @@
-import { Inter } from 'next/font/google'
-import '../public/globals.css'
 import '../public/material-dashboard.min.css'
-import Navbar from "@/app/components/Navbar";
 import React from "react";
-
-const inter = Inter({ subsets: ['latin'] })
 export default function RootLayout({
   children,
 }: {
@@ -16,13 +11,15 @@ export default function RootLayout({
                 <meta charSet="utf-8" />
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <link rel="icon" href="/favicon.ico" />
+                <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet"></link>
                 <title>Home</title>
             </head>
             <body className={'mt-5'} style={{
-                backgroundImage: "url(https://source.unsplash.com/vZlTg_McCDo/1600x900)",
+                backgroundImage: "/v904-nunny-012.jpg",
+                backgroundRepeat: "no-repeat",
                 backgroundSize: "cover",
+                backgroundPosition: "center",
             }}>
-                <Navbar />
                 {children}
             </body>
         </html>
