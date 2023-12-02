@@ -15,7 +15,7 @@ export default function RootLayout({
                 <title>Home</title>
             </head>
             <body className={'mt-5'} style={{
-                backgroundImage: "/v904-nunny-012.jpg",
+                backgroundImage: "url('/v904-nunny-012.jpg')",
                 backgroundRepeat: "no-repeat",
                 backgroundSize: "cover",
                 backgroundPosition: "center",
