@@ -7,7 +7,7 @@ import RightSection from "@/app/components/RightSection";
 export default async function Expenses() {
 	return (
 		<div className={'container'}>
-			<Sidebar />
+			<Sidebar active={'/expenses'}/>
 			<main>
 				<h1>Expenses</h1>
 				<div className={'analyse'}>
@@ -39,7 +39,6 @@ export default async function Expenses() {
 						})}
 					)}
 				</div>
-				<RecentExpenses />
 			</main>
 			<RightSection />
 		</div>

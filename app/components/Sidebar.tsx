@@ -1,33 +1,33 @@
-export default function Sidebar() {
-    // TODO: Add active class to the active link
+type Link = {
+    path: string;
+    text: string;
+    icon: string;
+};
+
+type SidebarProps = {
+    active: string;
+};
+
+const links: Link[] = [
+    { path: '/', text: 'Dashboard', icon: 'dashboard' },
+    { path: '/expenses', text: 'Expenses', icon: 'receipt_long' },
+    { path: '/todoist', text: 'Todoist', icon: 'inventory' },
+    { path: '/reports', text: 'Reports', icon: 'report_gmailerrorred' },
+    { path: '/users', text: 'Users', icon: 'account_circle' },
+    { path: '/settings', text: 'Settings', icon: 'settings' },
+];
+
+export default function Sidebar(props: SidebarProps) {
     return (
         <aside>
             <div className="sidebar">
-                <a href="/" className="active">
-                    <span className="material-icons-sharp">dashboard</span>
-                    <h3>Dashboard</h3>
-                </a>
-                <a href="/expenses">
-                    <span className="material-icons-sharp">receipt_long</span>
-                    <h3>Expenses</h3>
-                </a>
-                <a href="#">
-                    <span className="material-icons-sharp">inventory</span>
-                    <h3>Todoist</h3>
-                </a>
-                <a href="#">
-                    <span className="material-icons-sharp">report_gmailerrorred</span>
-                    <h3>Reports</h3>
-                </a>
-                <a href="#">
-                    <span className="material-icons-sharp">account_circle</span>
-                    <h3>Users</h3>
-                </a>
-                <a href="#">
-                    <span className="material-icons-sharp">settings</span>
-                    <h3>Settings</h3>
-                </a>
+                {links.map((link) => (
+                    <a key={link.path} href={link.path} className={props.active === link.path ? 'active' : ''}>
+                        <span className="material-icons-sharp">{link.icon}</span>
+                        <h3>{link.text}</h3>
+                    </a>
+                ))}
             </div>
         </aside>
-    )
+    );
 }
