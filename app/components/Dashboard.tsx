@@ -4,6 +4,9 @@ import RightSection from "@/app/components/RightSection";
 import RecentExpenses from "@/app/components/RecentExpenses";
 
 export default async function Dashboard() {
+	// TODO: Move the helper functions to a separate file
+	// TODO: Error handling for prisma queries
+	
 	function readEnv(keyString: string) {
 		const envEntries = Object.entries(process.env);
 		return envEntries.filter(([key, value]) => key.startsWith(keyString));
