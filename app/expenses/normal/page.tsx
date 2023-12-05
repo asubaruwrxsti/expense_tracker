@@ -1,6 +1,13 @@
 import RightSection from "@/app/components/RightSection";
 import Sidebar from "@/app/components/Sidebar";
 import { readEnv } from "@/utils/dashboardUtils";
+import {Metadata} from "next";
+
+export async function generateMetadata(): Promise<Metadata> {
+	return {
+		title: 'Normal Expenses',
+	}
+}
 
 export default async function NormalExpenses() {
 	const normalExpenses = readEnv('EXPENSE') || [];

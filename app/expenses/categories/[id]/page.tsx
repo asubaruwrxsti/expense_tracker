@@ -1,10 +1,25 @@
 import prisma from '@/prisma/db';
 import Sidebar from '@/app/components/Sidebar';
 import RightSection from '@/app/components/RightSection';
+import {Metadata} from "next";
 
 type CategoryProps = {
 	params: { id: string };
 };
+
+export async function generateMetadata({ params }: CategoryProps): Promise<Metadata> {
+	const categoryName = await prisma.categories.findUnique({
+		where: {
+			id: parseInt(params.id),
+		},
+		select: {
+			name: true,
+		},
+	}) as any;
+	return {
+		title: 'Expenses',
+	}
+}
 
 // TODO: Add category CRUD
 export default async function IDCategory({ params }: CategoryProps) {

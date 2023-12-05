@@ -4,6 +4,13 @@ import RightSection from "@/app/components/RightSection";
 import { calculatePercentage, readEnv } from "@/utils/dashboardUtils";
 import RecentExpenses from "@/app/components/RecentExpenses";
 import Link from "next/link";
+import {Metadata} from "next";
+
+export async function generateMetadata(): Promise<Metadata> {
+	return {
+		title: 'Expenses',
+	}
+}
 
 export default async function Expenses() {
 	const categories = await prisma.categories.findMany();

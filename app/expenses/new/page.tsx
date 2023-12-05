@@ -1,5 +1,12 @@
 'use client'
 import { FormEvent } from 'react'
+import {Metadata} from "next";
+
+export async function generateMetadata(): Promise<Metadata> {
+	return {
+		title: 'New Expense',
+	}
+}
 
 export default function NewExpense() {
 	async function handleSubmit(event: FormEvent) {
