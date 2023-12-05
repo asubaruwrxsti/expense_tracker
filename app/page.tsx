@@ -65,9 +65,9 @@ export default async function Home() {
 						</div>
 					</div>
 				</div>
-				<RecentExpenses/>
+				<RecentExpenses take={3}/>
 			</main>
-			<RightSection/>
+			<RightSection />
 		</div>
 	);
 }

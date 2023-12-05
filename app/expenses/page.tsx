@@ -59,7 +59,7 @@ export default async function Expenses() {
 						</div>
 					))}
 				</div>
-				<RecentExpenses {...{ take: 100 }} /> {/* Show 100 recent expenses */}
+				<RecentExpenses take={100}/> {/* Show 100 recent expenses */}
 			</main>
 			<RightSection />
 		</div>
