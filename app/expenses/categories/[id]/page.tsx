@@ -17,7 +17,7 @@ export async function generateMetadata({ params }: CategoryProps): Promise<Metad
 		},
 	}) as any;
 	return {
-		title: 'Expenses',
+		title: categoryName.name,
 	}
 }
 
