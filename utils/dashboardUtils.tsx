@@ -18,7 +18,7 @@ export async function calculateExpenses() {
 
 export async function calculateBudget() {
 	// TODO: Dont hardcode the id, get the id from the session
-	let totalBudget = await prisma.user.findUnique({
+	let totalBudget: any = await prisma.user.findUnique({
 		where: {
 			id: 1,
 		},

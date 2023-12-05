@@ -1,7 +1,7 @@
 import prisma from "@/prisma/db";
 import Sidebar from "@/app/components/Sidebar";
 import RightSection from "@/app/components/RightSection";
-import { calculatePercentage } from "@/utils/dashboardUtils";
+import { calculatePercentage, readEnv } from "@/utils/dashboardUtils";
 import RecentExpenses from "@/app/components/RecentExpenses";
 import Link from "next/link";
 
@@ -31,14 +31,16 @@ export default async function Expenses() {
 		};
 	}));
 
+	const normalExpenses = readEnv('EXPENSE') || [];
+
 	return (
 		<div className={'container'}>
 			<Sidebar active={'/expenses'} />
 			<main>
 				<h1>Expenses</h1>
 				<div className={'analyse'}>
-					{categoryData.map(({ category, totalAmount, percentageData }) => (
-						<div className={'sales'}>
+					{categoryData.map(({ category, totalAmount, percentageData }, index) => (
+						<div className={'sales'} key={index}>
 							<Link href={`/expenses/categories/${category.id}`}>
 								<div className={'status'}>
 									<div className={'info'}>
@@ -61,6 +63,17 @@ export default async function Expenses() {
 							</Link>
 						</div>
 					))}
+					<div className={'sales'} key={'normal'}>
+						<Link href={`/expenses/normal`}>
+							<div className={'status'}>
+								<div className={'info'}>
+									<h1 className={'card-text'}>Normal Expenses</h1>
+									<h2 className={'card-text px-2'}> {normalExpenses.reduce((acc, expense) => acc + parseInt(expense[1] || '0'), 0)} ALL</h2>
+								</div>
+							</div>
+							<p className={'text-muted'}>Category Expenses</p>
+						</Link>
+					</div>
 				</div>
 				<RecentExpenses take={100} /> {/* Show 100 recent expenses */}
 			</main>
