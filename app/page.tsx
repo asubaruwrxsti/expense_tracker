@@ -3,10 +3,10 @@ import RightSection from "@/app/components/RightSection";
 import RecentExpenses from "@/app/components/RecentExpenses";
 import { calculateExpenses, calculatePercentage, calculateBudget, compareLastMonth, calculateIncome } from "@/utils/dashboardUtils";
 
-export default async function Home() {	
+export default async function Home() {
 	return (
 		<div className={'container'}>
-			<Sidebar active={'/'}/>
+			<Sidebar active={'/'} />
 			<main>
 				<h1>Dashboard</h1>
 				<div className={'analyse'}>
@@ -65,7 +65,7 @@ export default async function Home() {
 						</div>
 					</div>
 				</div>
-				<RecentExpenses take={3}/>
+				<RecentExpenses take={3} />
 			</main>
 			<RightSection />
 		</div>

@@ -27,7 +27,7 @@ export default function RightSection() {
 					</div>
 				</div>
 			</div>
-			
+
 			{/* TODO: fill user card from user info */}
 			<div className="user-profile">
 				<div className="logo">
@@ -36,7 +36,7 @@ export default function RightSection() {
 					<p>Paragraph</p>
 				</div>
 			</div>
-			
+
 			{/* TODO: i like this, use todoist to fill it */}
 			<div className="reminders">
 				<div className="header">
@@ -45,7 +45,7 @@ export default function RightSection() {
 						notifications_none
 					</span>
 				</div>
-			
+
 				<div className="notification">
 					<div className="icon">
 						<span className="material-icons-sharp">
@@ -83,13 +83,13 @@ export default function RightSection() {
 						</span>
 					</div>
 				</div>
-				
+
 				{/* TODO: implement this using todoist */}
 				<div className="notification add-reminder">
 					<div>
-                        <span className="material-icons-sharp">
-                            add
-                        </span>
+						<span className="material-icons-sharp">
+							add
+						</span>
 						<h3>Add Reminder</h3>
 					</div>
 				</div>
