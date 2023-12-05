@@ -1,4 +1,6 @@
-type Link = {
+import Link from 'next/link';
+
+type anchorLink = {
     path: string;
     text: string;
     icon: string;
@@ -8,7 +10,7 @@ type SidebarProps = {
     active: string;
 };
 
-const links: Link[] = [
+const links: anchorLink[] = [
     { path: '/', text: 'Dashboard', icon: 'dashboard' },
     { path: '/expenses', text: 'Expenses', icon: 'receipt_long' },
     { path: '/todoist', text: 'Todoist', icon: 'inventory' },
@@ -22,10 +24,10 @@ export default function Sidebar(props: SidebarProps) {
         <aside>
             <div className="sidebar">
                 {links.map((link) => (
-                    <a key={link.path} href={link.path} className={props.active === link.path ? 'active' : ''}>
-                        <span className="material-icons-sharp">{link.icon}</span>
-                        <h3>{link.text}</h3>
-                    </a>
+                    <Link href={link.path} key={link.path} className={`${props.active === link.path ? 'active' : ''}`}>
+						<span className={`material-icons-sharp`}>{link.icon}</span>
+						<p>{link.text}</p>
+					</Link>
                 ))}
             </div>
         </aside>
