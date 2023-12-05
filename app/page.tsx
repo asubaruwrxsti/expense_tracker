@@ -28,6 +28,7 @@ export default async function Home() {
 								</div>
 							</div>
 						</div>
+						<p className={'text-muted'}>% based off normal expenses</p>
 					</div>
 					<div className={'sales'}>
 						<div className={'status'}>

@@ -1,6 +1,6 @@
 import prisma from "@/prisma/db";
 // TODO: Error handling for prisma queries
-
+// TODO: apply the calculations for this month only
 
 export function readEnv(keyString: string) {
 	const envEntries = Object.entries(process.env);
@@ -46,7 +46,7 @@ export async function compareLastMonth() {
 			const lastDay = new Date(year, month + 1, 0);
 			return [firstDay, lastDay];
 		}
-		
+
 		const firstDay = new Date(year, 0, 1);
 		const lastDay = new Date(year, 12, 0);
 		return [firstDay, lastDay];
@@ -62,7 +62,7 @@ export async function compareLastMonth() {
 			},
 		},
 	}) as any;
-	
+
 	const lastMonthExpenses = await prisma.expense.aggregate({
 		_sum: {
 			amount: true,
@@ -76,7 +76,7 @@ export async function compareLastMonth() {
 	}) as any;
 	const percentage = Math.round(((currentMonthExpenses._sum.amount - lastMonthExpenses._sum.amount) / lastMonthExpenses._sum.amount) * 100);
 	let iconClass, textClass;
-	
+
 	// TODO: Fix the coloring
 	if (percentage > 0) {
 		iconClass = 'material-icons-sharp text-success';
@@ -88,7 +88,7 @@ export async function compareLastMonth() {
 		iconClass = 'material-icons-sharp text-warning';
 		textClass = 'text-warning';
 	}
-	
+
 	return (
 		<div style={{ display: 'flex', alignItems: 'center' }}>
 			<span className={iconClass}>
@@ -99,26 +99,49 @@ export async function compareLastMonth() {
 	);
 }
 
-export async function calculatePercentage() {
-	const normalExpenses = () => {
-		const expenses = readEnv('EXPENSE_');
-		let total = 0;
-		expenses.forEach(([key, value]) => {
-			total += parseInt(value as string);
+export async function calculatePercentage(categoryId: number = 0) {
+	if (categoryId === 0) {
+		// Calculate percentage based on normal expenses
+		const normalExpenses = () => {
+			const expenses = readEnv('EXPENSE_');
+			let total = 0;
+			expenses.forEach(([key, value]) => {
+				total += parseInt(value as string);
+			});
+			return total;
+		};
+
+		const currentExpenses = parseInt((await calculateExpenses()).split(' ')[0]);
+		const completeness = Math.round((currentExpenses / normalExpenses()) * 100);
+		const circumference = 2 * Math.PI * 36; // Replace 36 with the actual radius value
+
+		const dashArrayLength = (completeness / 100) * circumference;
+
+		return {
+			normalExpenses: normalExpenses(),
+			completeness: `${completeness}%`,
+			dashArrayLength: `${dashArrayLength} ${circumference}`,
+			dashOffset: `${circumference - dashArrayLength}`,
+		};
+	} else {
+		// Calculate percentage based on expenses of a specific category
+		// Calculate percentage based on normal expenses
+		const expenses = await prisma.expense.findMany({
+			where: {
+				categoriesId: categoryId,
+			},
 		});
-		return total;
+
+		const totalIncome = parseInt(await calculateIncome().then((income) => income.split(' ')[0]));
+		const totalAmount = expenses.reduce((acc, expense) => acc + expense.amount, 0);
+		const completeness = Math.round((totalAmount / totalIncome) * 100);
+		const circumference = 2 * Math.PI * 36; // Replace 36 with the actual radius value
+		const dashArrayLength = (completeness / 100) * circumference;
+
+		return {
+			completeness: `${completeness}%`,
+			dashArrayLength: `${dashArrayLength} ${circumference}`,
+			dashOffset: `${circumference - dashArrayLength}`,
+		};
 	}
-	
-	const currentExpenses = parseInt((await calculateExpenses()).split(' ')[0]);
-	const completeness = Math.round((currentExpenses / normalExpenses()) * 100);
-	const circumference = 2 * Math.PI * 36; // Replace 36 with the actual radius value
-	
-	const dashArrayLength = (completeness / 100) * circumference;
-	
-	return {
-		normalExpenses: normalExpenses(),
-		completeness: `${completeness}%`,
-		dashArrayLength: `${dashArrayLength} ${circumference}`,
-		dashOffset: `${circumference - dashArrayLength}`,
-	};
 }
