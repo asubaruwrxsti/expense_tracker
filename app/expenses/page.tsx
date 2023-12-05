@@ -2,6 +2,7 @@ import prisma from "@/prisma/db";
 import Sidebar from "@/app/components/Sidebar";
 import RightSection from "@/app/components/RightSection";
 import { calculatePercentage } from "@/utils/dashboardUtils";
+import RecentExpenses from "@/app/components/RecentExpenses";
 
 export default async function Expenses() {
 	const categories = await prisma.categories.findMany();
@@ -58,6 +59,7 @@ export default async function Expenses() {
 						</div>
 					))}
 				</div>
+				<RecentExpenses {...{ take: 100 }} /> {/* Show 100 recent expenses */}
 			</main>
 			<RightSection />
 		</div>

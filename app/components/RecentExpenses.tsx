@@ -1,9 +1,13 @@
 import prisma from "@/prisma/db";
 import Link from "next/link";
 
-export default async function RecentExpenses() {
+type ExpenseProps = {
+	take ?: number;
+};
+
+export default async function RecentExpenses({ take = 5 }: ExpenseProps) {
 	const recentExpenses = await prisma.expense.findMany({
-		take: 5,
+		take: take ?? 5,
 		include: {
 			Categories: true, // Include the categories information
 		},
