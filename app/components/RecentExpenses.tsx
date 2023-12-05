@@ -3,9 +3,11 @@ import Link from "next/link";
 
 type ExpenseProps = {
 	take?: number;
+	enableLink?: boolean;
+	title?: string;
 };
 
-export default async function RecentExpenses({ take = 5 }: ExpenseProps) {
+export default async function RecentExpenses({ take = 5, enableLink = true, title = "Recent Expenses" }: ExpenseProps) {
 	const recentExpenses = await prisma.expense.findMany({
 		take: take,
 		include: {
@@ -15,7 +17,7 @@ export default async function RecentExpenses({ take = 5 }: ExpenseProps) {
 
 	return (
 		<div className="recent-orders">
-			<h2>Recent Expenses</h2>
+			{title ? <h1>{title}</h1> : null}
 			<table>
 				<thead>
 					<tr>
@@ -38,7 +40,9 @@ export default async function RecentExpenses({ take = 5 }: ExpenseProps) {
 					))}
 				</tbody>
 			</table>
-			<Link href={'/expenses'}>View All Expenses</Link>
+			{enableLink ? (
+				<Link href="/expenses">View all expenses</Link>
+			) : null}
 		</div>
 	);
 }

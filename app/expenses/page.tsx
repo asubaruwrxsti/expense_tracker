@@ -71,11 +71,11 @@ export default async function Expenses() {
 									<h2 className={'card-text px-2'}> {normalExpenses.reduce((acc, expense) => acc + parseInt(expense[1] || '0'), 0)} ALL</h2>
 								</div>
 							</div>
-							<p className={'text-muted'}>Category Expenses</p>
 						</Link>
+						<p className={'text-muted'}>* Based on env variables</p>
 					</div>
 				</div>
-				<RecentExpenses take={100} /> {/* Show 100 recent expenses */}
+				<RecentExpenses take={100} enableLink={false} title="All Expenses" /> {/* Show 100 recent expenses */}
 			</main>
 			<RightSection />
 		</div>
