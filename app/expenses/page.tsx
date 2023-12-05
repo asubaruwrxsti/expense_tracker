@@ -3,6 +3,7 @@ import Sidebar from "@/app/components/Sidebar";
 import RightSection from "@/app/components/RightSection";
 import { calculatePercentage } from "@/utils/dashboardUtils";
 import RecentExpenses from "@/app/components/RecentExpenses";
+import Link from "next/link";
 
 export default async function Expenses() {
 	const categories = await prisma.categories.findMany();
@@ -37,25 +38,27 @@ export default async function Expenses() {
 				<h1>Expenses</h1>
 				<div className={'analyse'}>
 					{categoryData.map(({ category, totalAmount, percentageData }) => (
-						<div className={'sales'} key={category.id}>
-							<div className={'status'}>
-								<div className={'info'}>
-									<h1 className={'card-text'}>{category.name}</h1>
-									<h2 className={'card-text px-2'}>{totalAmount} ALL</h2>
-								</div>
-								<div className={'progresss'}>
-									<svg>
-										<circle cx="38" cy="38" r="36" style={{
-											strokeDasharray: percentageData.dashArrayLength,
-											strokeDashoffset: percentageData.dashOffset,
-										}}></circle>
-									</svg>
-									<div className={'percentage'}>
-										<p>{percentageData.completeness}</p>
+						<div className={'sales'}>
+							<Link href={`/expenses/categories/${category.id}`}>
+								<div className={'status'}>
+									<div className={'info'}>
+										<h1 className={'card-text'}>{category.name}</h1>
+										<h2 className={'card-text px-2'}>{totalAmount} ALL</h2>
+									</div>
+									<div className={'progresss'}>
+										<svg>
+											<circle cx="38" cy="38" r="36" style={{
+												strokeDasharray: percentageData.dashArrayLength,
+												strokeDashoffset: percentageData.dashOffset,
+											}}></circle>
+										</svg>
+										<div className={'percentage'}>
+											<p>{percentageData.completeness}</p>
+										</div>
 									</div>
 								</div>
-							</div>
-							<p className={'text-muted'}>% based off total income</p>
+								<p className={'text-muted'}>% based off total income</p>
+							</Link>
 						</div>
 					))}
 				</div>

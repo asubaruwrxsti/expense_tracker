@@ -2,7 +2,7 @@ import React from 'react';
 import prisma from '@/prisma/db';
 import Link from "next/link";
 import {Metadata} from "next";
-import {Expense} from ".prisma/client";
+import {Expense} from "@prisma/client";
 
 type Props = {
 	params: { id: string }
