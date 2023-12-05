@@ -7,7 +7,7 @@ type ExpenseProps = {
 
 export default async function RecentExpenses({ take = 5 }: ExpenseProps) {
 	const recentExpenses = await prisma.expense.findMany({
-		take: take ?? 5,
+		take: take,
 		include: {
 			Categories: true, // Include the categories information
 		},
