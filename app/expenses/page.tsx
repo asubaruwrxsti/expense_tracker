@@ -44,9 +44,13 @@ export default async function Expenses() {
 		<div className={'container'}>
 			<Sidebar active={'/expenses'} />
 			<main>
-				<h1>Expenses</h1>
-				<Link href={'/expenses/new'}> Add new expense </Link>
-				<div className={'analyse'}>
+				<div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+					<h1>Expenses</h1>
+					<Link href={'/expenses/create'}>
+						<button className={'btn btn-primary'}>Add Expense</button>
+					</Link>
+				</div>
+				<div className={'d-flex flex-wrap analyse'}>
 					{categoryData.map(({ category, totalAmount, percentageData }, index) => (
 						<div className={'sales'} key={index}>
 							<Link href={`/expenses/categories/${category.id}`}>

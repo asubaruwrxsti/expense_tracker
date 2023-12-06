@@ -1,4 +1,4 @@
-import '../public/material-dashboard.min.css'
+import '@/public/material-dashboard.min.css'
 import React from "react";
 export default function RootLayout({
 	children,
