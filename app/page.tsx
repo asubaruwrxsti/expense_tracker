@@ -1,9 +1,12 @@
 import Sidebar from "@/app/components/Sidebar";
 import RightSection from "@/app/components/RightSection";
 import RecentExpenses from "@/app/components/RecentExpenses";
-import { calculateExpenses, calculatePercentage, calculateBudget, compareLastMonth, calculateIncome } from "@/utils/dashboardUtils";
+import { calculateExpenses, calculatePercentage, calculateBudget, compareLastMonth, calculateIncome, readEnv } from "@/utils/dashboardUtils";
+import Link from "next/link";
 
 export default async function Home() {
+	const normalExpenses = readEnv('EXPENSE') || [];
+
 	return (
 		<div className={'container'}>
 			<Sidebar active={'/'} />
@@ -30,13 +33,16 @@ export default async function Home() {
 						</div>
 						<p className={'text-muted'}>% based off normal expenses</p>
 					</div>
-					<div className={'sales'}>
-						<div className={'status'}>
-							<div className={'info'}>
-								<h1 className={'card-text'}>Normal Expenses</h1>
-								<h2 className={'card-text px-2'}>{(await calculatePercentage()).normalExpenses} ALL</h2>
+					<div className={'sales'} key={'normal'}>
+						<Link href={`/expenses/normal`}>
+							<div className={'status'}>
+								<div className={'info'}>
+									<h1 className={'card-text'}>Normal Expenses</h1>
+									<h2 className={'card-text px-2'}> {normalExpenses.reduce((acc, expense) => acc + parseInt(expense[1] || '0'), 0)} ALL</h2>
+								</div>
 							</div>
-						</div>
+						</Link>
+						<p className={'text-muted'}>* Based on env variables</p>
 					</div>
 					<div className={'sales'}>
 						<div className={'status'}>
