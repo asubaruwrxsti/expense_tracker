@@ -49,7 +49,7 @@ export default async function Expenses() {
 					<Link href={'/expenses/new'}>
 						{/* TODO: Add dedicated class to this */}
 						<button style={{
-							backgroundColor: '#3f51b5',
+							backgroundColor: '#6c9bcf',
 							color: 'white',
 							border: 'none',
 							padding: '0.5rem 1rem',
