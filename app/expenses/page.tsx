@@ -46,8 +46,16 @@ export default async function Expenses() {
 			<main>
 				<div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
 					<h1>Expenses</h1>
-					<Link href={'/expenses/create'}>
-						<button className={'btn btn-primary'}>Add Expense</button>
+					<Link href={'/expenses/new'}>
+						{/* TODO: Add dedicated class to this */}
+						<button style={{
+							backgroundColor: '#3f51b5',
+							color: 'white',
+							border: 'none',
+							padding: '0.5rem 1rem',
+							borderRadius: '0.5rem',
+							cursor: 'pointer'
+						}}>Add Expense</button>
 					</Link>
 				</div>
 				<div className={'d-flex flex-wrap analyse'}>
