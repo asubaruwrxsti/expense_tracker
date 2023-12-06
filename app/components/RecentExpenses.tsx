@@ -13,6 +13,9 @@ export default async function RecentExpenses({ take = 5, enableLink = true, titl
 		include: {
 			Categories: true, // Include the categories information
 		},
+		orderBy: {
+			createdAt: 'desc',
+		},
 	}) as any[];
 
 	return (

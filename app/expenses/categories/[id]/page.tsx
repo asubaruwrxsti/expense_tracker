@@ -30,6 +30,9 @@ export default async function IDCategory({ params }: CategoryProps) {
 		include: {
 			Categories: true,
 		},
+		orderBy: {
+			createdAt: 'desc',
+		},
 	}) as any[];
 
 	return (
