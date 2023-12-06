@@ -15,10 +15,12 @@ export default async function Home() {
 				<div className={'analyse'}>
 					<div className={'sales'}>
 						<div className={'status'}>
-							<div className={'info'}>
-								<h1 className={'card-text'}>Total Expenses</h1>
-								<h2 className={'card-text px-2'}>{await calculateExpenses()}</h2>
-							</div>
+							<Link href={`/expenses`}>
+								<div className={'info'}>
+									<h1 className={'card-text'}>Total Expenses</h1>
+									<h2 className={'card-text px-2'}>{await calculateExpenses()}</h2>
+								</div>
+							</Link>
 							<div className={'progresss'}>
 								<svg>
 									<circle cx="38" cy="38" r="36" style={{

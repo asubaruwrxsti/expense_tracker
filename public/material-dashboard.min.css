@@ -148,6 +148,7 @@ aside .toggle .close{
 }
 
 aside .sidebar{
+	padding: 10px;
     display: flex;
     flex-direction: column;
     background-color: var(--color-white);
