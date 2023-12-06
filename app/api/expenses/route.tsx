@@ -1,5 +1,6 @@
 import prisma from "@/prisma/db";
 import todoist from '@/todoist/todoist';
+import { NextResponse } from 'next/server';
 
 export async function GET() {
 	let today = new Date();
@@ -19,8 +20,8 @@ export async function GET() {
 					content: `${date}`,
 				}
 			)
-			return new Response(JSON.stringify([]));
+			return new NextResponse(JSON.stringify([]));
 		}
-		return new Response(JSON.stringify(expenses));
+		return new NextResponse(JSON.stringify(expenses));
 	});
 }

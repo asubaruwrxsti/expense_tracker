@@ -4,7 +4,7 @@ import RightSection from "@/app/components/RightSection";
 import { calculatePercentage, readEnv } from "@/utils/dashboardUtils";
 import RecentExpenses from "@/app/components/RecentExpenses";
 import Link from "next/link";
-import {Metadata} from "next";
+import { Metadata } from "next";
 
 export async function generateMetadata(): Promise<Metadata> {
 	return {
@@ -45,6 +45,7 @@ export default async function Expenses() {
 			<Sidebar active={'/expenses'} />
 			<main>
 				<h1>Expenses</h1>
+				<Link href={'/expenses/new'}> Add new expense </Link>
 				<div className={'analyse'}>
 					{categoryData.map(({ category, totalAmount, percentageData }, index) => (
 						<div className={'sales'} key={index}>
@@ -82,7 +83,9 @@ export default async function Expenses() {
 						<p className={'text-muted'}>* Based on env variables</p>
 					</div>
 				</div>
-				<RecentExpenses take={100} enableLink={false} title="All Expenses" /> {/* Show 100 recent expenses */}
+				<div style={{ marginBottom: '2rem' }}>
+					<RecentExpenses take={100} enableLink={false} title="All Expenses" /> {/* Show 100 recent expenses */}
+				</div>
 			</main>
 			<RightSection />
 		</div>

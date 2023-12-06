@@ -1,21 +1,24 @@
 import prisma from '@/prisma/db';
 import todoist from '@/todoist/todoist';
+import { NextResponse } from 'next/server';
 
 export async function POST(request: Request) {
-	const body = await request.json();
-	await prisma.expense.create({
-		data: {
-			name: body.name,
-			amount: parseFloat(body.amount),
-			createdAt: new Date(),
-			description: body.description,
-			userId: 1,
-			categoriesId: 1,
-		}
-	}).then(async (expense) => {
+	try {
+		const body = await request.json();
+		const expense = await prisma.expense.create({
+			data: {
+				name: body.name,
+				amount: parseFloat(body.amount),
+				createdAt: new Date(),
+				description: body.description,
+				userId: 1,
+				categoriesId: 1,
+			},
+		});
+
 		const current_description = await todoist.getTask(process.env.TODOIST_TASK_ID as string).then(
 			(task) => task.description
-		)
+		);
 
 		const today = new Date();
 		const date = `${today.getDate()} ${today.toLocaleString('default', { month: 'short' })} ${today.getFullYear()}`;
@@ -30,8 +33,12 @@ export async function POST(request: Request) {
 				description: `${new_description}`,
 			}
 		);
-		return new Response(JSON.stringify(response));
-	}).catch((error) => {
-		return new Response(JSON.stringify(error));
-	});
+
+		return new NextResponse(JSON.stringify(response));
+	} catch (error) {
+		console.error('Error processing form:', error);
+		return new NextResponse(JSON.stringify({ error: 'Internal Server Error' }), {
+			status: 500,
+		});
+	}
 }
