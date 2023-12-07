@@ -3,6 +3,7 @@ import RightSection from "@/app/components/RightSection";
 import todoist from '@/todoist/todoist';
 import { Metadata } from "next";
 import { calculatePercentageOfNumber, parseDescription } from "@/utils/todoistUtils";
+import SyncExpenses from "@/app/components/HandleSync";
 
 export async function generateMetadata(): Promise<Metadata> {
 	return {
@@ -18,19 +19,24 @@ export default async function Todoist() {
 		return '';
 	});
 
+	const isEnabled = current_description !== '';
+
 	return (
 		<div className={'container'}>
 			<Sidebar active={'/todoist'} />
-			<main style={{ flex: '1', padding: '20px' }}>
-				<span
-					style={{
-						display: 'flex',
-						alignItems: 'center',
-						marginBottom: '10px',
-					}}>
-					<h1 className="text-center" style={{ marginRight: '10px' }}> Todoist </h1>
-					<p className={'text-muted'}>Today's Date is: {new Date().toLocaleDateString()}</p>
-				</span>
+			<main>
+				<div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'top' }}>
+					<span
+						style={{
+							display: 'flex',
+							alignItems: 'center',
+							marginBottom: '10px',
+						}}>
+						<h1 className="text-center" style={{ marginRight: '10px' }}> Todoist </h1>
+						<p className={'text-muted'}>Today's Date is: {new Date().toLocaleDateString()}</p>
+					</span>
+					<SyncExpenses enabled={isEnabled} />
+				</div>
 				<h3 style={{ fontSize: '16px', color: '#555', marginBottom: '15px' }}>
 					Expenses today
 				</h3>
