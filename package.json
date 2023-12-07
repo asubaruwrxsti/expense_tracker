@@ -13,7 +13,7 @@
     "@prisma/client": "5.5.2",
     "chart.js": "^4.4.0",
     "googleapis": "^128.0.0",
-    "next": "13.5.5",
+    "next": "^14.0.3",
     "react": "^18",
     "react-dom": "^18",
     "sqlite3": "^5.1.6"

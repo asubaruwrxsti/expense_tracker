@@ -23,7 +23,18 @@ export default async function SyncExpenses({ enabled }: SyncExpensesProps) {
 	}
 
 	if (!enabled) {
-		return null;
+		return (
+			< button className={'notification add-reminder'}
+				style={{
+					padding: '1rem',
+					border: 'none',
+				}}
+				disabled
+			>
+				<i className={'material-icons-sharp'}>thumbsup</i>
+				<span>Synced</span>
+			</button >
+		)
 	} else {
 		return (
 			< button className={'notification add-reminder'}
