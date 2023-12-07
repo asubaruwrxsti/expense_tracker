@@ -1,6 +1,7 @@
 import prisma from "@/prisma/db";
 // TODO: Error handling for prisma queries
 // TODO: apply the calculations for this month only
+// TODO: migrate readEnv to reading from the database
 
 export function readEnv(keyString: string) {
 	const envEntries = Object.entries(process.env);
