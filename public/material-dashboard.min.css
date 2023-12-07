@@ -2,6 +2,7 @@
 
 :root{
     --color-primary: #6C9BCF;
+	--color-primary-variant: #81a5d615;
     --color-danger: #FF0060;
     --color-success: #1B9C85;
     --color-warning: #F7D060;
@@ -540,7 +541,7 @@ main .recent-orders a{
 form{
 	display: grid;
 	grid-template-columns: 1fr 1fr;
-	gap: 1rem;
+	column-gap: 5rem;
 	margin-bottom: 1rem;
 }
 
@@ -556,10 +557,14 @@ form label{
 
 form input{
 	border-radius: 10px;
-	border: 1px solid #6d6d6d;
+	border: 1px solid #6d6d6d2f;
 	padding: 0.5rem;
 	font-size: 1rem;
 	line-height: 1.5rem;
+	width: 100%;
+	height: 45px;
+	background-color: var(--color-primary-variant);
+	box-shadow: var(--box-shadow);
 }
 
 form select{

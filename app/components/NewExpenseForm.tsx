@@ -85,18 +85,24 @@ export default function NewExpenseForm({ selectData }: { selectData: NewExpenseF
 							<label htmlFor="amount">
 								Amount
 							</label>
-							<input
-								type="number"
-								id="amount"
-								placeholder="Enter amount"
-								value={formData.amount}
-								onChange={handleInputChange}
-							/>
+							<div style={{ display: 'flex', alignItems: 'center' }}>
+								<input
+									type="number"
+									id="amount"
+									placeholder="Enter amount"
+									value={formData.amount}
+									onChange={handleInputChange}
+								/>
+								<div style={{ marginLeft: '1rem' }}>
+									<span style={{ marginLeft: '1rem' }}>ALL</span>
+								</div>
+							</div>
 						</div>
 						<div style={{ marginBottom: '1rem' }}>
 							<label htmlFor="category">
 								Category
 							</label>
+							{/* TODO: fix the styling of the select dropdown */}
 							<select
 								id="category"
 								value={formData.category}
@@ -113,7 +119,9 @@ export default function NewExpenseForm({ selectData }: { selectData: NewExpenseF
 							style={{
 								marginTop: '2rem',
 								padding: '0.8rem',
-								border: 'none',
+								border: 'solid 1px #6C9BCF',
+								width: '30%',
+								height: '45px',
 							}}
 							type='submit'
 						>
