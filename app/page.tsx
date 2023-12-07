@@ -71,6 +71,7 @@ export default async function Home() {
 								<h2 className={'card-text px-2'}>{await calculateIncome()}</h2>
 							</div>
 						</div>
+						<p className={'text-muted'}>* Based on env variables</p>
 					</div>
 				</div>
 				<RecentExpenses take={3} />

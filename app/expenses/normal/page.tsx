@@ -38,7 +38,7 @@ export default async function NormalExpenses() {
 							<h1 className={'text-center'} style={{ marginRight: '10px' }}>
 								{'Normal Expenses'}
 							</h1>
-							<p className={'text-muted'}>Normal Expenses</p>
+							<p className={'text-muted'}>* Based on .env file</p>
 						</span>
 						<table>
 							<thead>
