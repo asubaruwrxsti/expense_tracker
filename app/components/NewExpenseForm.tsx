@@ -7,9 +7,13 @@ type NewExpenseFormProps = {
 	description: string;
 	amount: number;
 	category: string;
+	selectData?: {
+		id: string;
+		name: string;
+	}[];
 };
 
-export default function NewExpenseForm() {
+export default function NewExpenseForm({ selectData }: { selectData: NewExpenseFormProps['selectData'] }) {
 	const router = useRouter();
 
 	const [formData, setFormData] = useState<NewExpenseFormProps>({
@@ -42,63 +46,82 @@ export default function NewExpenseForm() {
 	};
 
 	return (
-		<form className="mt-4 p-6 bg-white shadow-md rounded-md" onSubmit={handleSubmit}>
-			<div className="mb-4">
-				<label htmlFor="name" className="block text-gray-700 text-sm font-bold mb-2">
-					Name
-				</label>
-				<input
-					type="text"
-					className="border border-gray-300 p-2 w-full"
-					id="name"
-					placeholder="Enter name"
-					value={formData.name}
-					onChange={handleInputChange}
-				/>
+		<div className='container' style={{ display: 'flex' }}>
+			<div className='analyse'
+				style={{
+					margin: '0 auto',
+					display: 'flex',
+					width: '100%',
+				}}>
+				<div className='sales' style={{
+					width: '100%',
+				}}>
+					<form onSubmit={handleSubmit}>
+						<div style={{ marginBottom: '1rem' }}>
+							<label htmlFor="name">
+								Name
+							</label>
+							<input
+								type="text"
+								id="name"
+								placeholder="Enter name"
+								value={formData.name}
+								onChange={handleInputChange}
+							/>
+						</div>
+						<div style={{ marginBottom: '1rem' }}>
+							<label htmlFor="description">
+								Description
+							</label>
+							<input
+								type="text"
+								id="description"
+								placeholder="Enter description"
+								value={formData.description}
+								onChange={handleInputChange}
+							/>
+						</div>
+						<div style={{ marginBottom: '1rem' }}>
+							<label htmlFor="amount">
+								Amount
+							</label>
+							<input
+								type="number"
+								id="amount"
+								placeholder="Enter amount"
+								value={formData.amount}
+								onChange={handleInputChange}
+							/>
+						</div>
+						<div style={{ marginBottom: '1rem' }}>
+							<label htmlFor="category">
+								Category
+							</label>
+							<select
+								id="category"
+								value={formData.category}
+								onChange={handleInputChange}
+							>
+								<option disabled>Choose a category</option>
+								{selectData?.map((category) => (
+									<option key={category.id}>
+										{category.name}</option>
+								))}
+							</select>
+						</div>
+						<button className={'notification add-reminder'}
+							style={{
+								marginTop: '2rem',
+								padding: '0.8rem',
+								border: 'none',
+							}}
+							type='submit'
+						>
+							<span>Create Expense</span>
+						</button>
+					</form>
+				</div>
 			</div>
-			<div className="mb-4">
-				<label htmlFor="description" className="block text-gray-700 text-sm font-bold mb-2">
-					Description
-				</label>
-				<input
-					type="text"
-					className="border border-gray-300 p-2 w-full"
-					id="description"
-					placeholder="Enter description"
-					value={formData.description}
-					onChange={handleInputChange}
-				/>
-			</div>
-			<div className="mb-4">
-				<label htmlFor="amount" className="block text-gray-700 text-sm font-bold mb-2">
-					Amount
-				</label>
-				<input
-					type="number"
-					className="border border-gray-300 p-2 w-full"
-					id="amount"
-					placeholder="Enter amount"
-					value={formData.amount}
-					onChange={handleInputChange}
-				/>
-			</div>
-			<div className="mb-4">
-				<label htmlFor="category" className="block text-gray-700 text-sm font-bold mb-2">
-					Category
-				</label>
-				<select
-					className="border border-gray-300 p-2 w-full"
-					id="category"
-					value={formData.category}
-					onChange={handleInputChange}
-				>
-					<option disabled>Choose a category</option>
-					{/* Add your category options here */}
-				</select>
-			</div>
-			<button type="submit" className="bg-blue-500 text-white p-2 rounded-md">
-				Submit
-			</button>
-		</form>
+		</div>
 	);
 }

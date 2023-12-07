@@ -58,7 +58,7 @@ export default async function Expenses() {
 						</button>
 					</Link>
 				</div>
-				<div className={'d-flex flex-wrap analyse'}>
+				<div className={'analyse'}>
 					{categoryData.map(({ category, totalAmount, percentageData }, index) => (
 						<div className={'sales'} key={index}>
 							<Link href={`/expenses/categories/${category.id}`}>
