@@ -44,7 +44,7 @@ export default async function Expenses() {
 		<div className={'container'}>
 			<Sidebar active={'/expenses'} />
 			<main>
-				<div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+				<div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'top' }}>
 					<h1>Expenses</h1>
 					<Link href={'/expenses/new'}>
 						{/* TODO: Add dedicated class to this */}
