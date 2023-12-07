@@ -53,7 +53,6 @@ export default async function Expenses() {
 								padding: '1rem',
 								border: 'none',
 							}}>
-								 {/* use material icons */}
 							<i className={'material-icons-sharp'}>add</i>
 							<span>Add Expense</span>
 						</button>

@@ -42,7 +42,7 @@ export default function NewExpenseForm() {
 	};
 
 	return (
-		<form className="mt-4 p-6 bg-white shadow-md rounded-md">
+		<form className="mt-4 p-6 bg-white shadow-md rounded-md" onSubmit={handleSubmit}>
 			<div className="mb-4">
 				<label htmlFor="name" className="block text-gray-700 text-sm font-bold mb-2">
 					Name
