@@ -8,6 +8,15 @@ export function readEnv(keyString: string) {
 	return envEntries.filter(([key, value]) => key.startsWith(keyString));
 }
 
+export const normalExpenses = () => {
+	const expenses = readEnv('EXPENSE_');
+	let total = 0;
+	expenses.forEach(([key, value]) => {
+		total += parseInt(value as string);
+	});
+	return total;
+};
+
 export async function calculateExpenses() {
 	const expense = await prisma.expense.aggregate({
 		_sum: {
@@ -102,15 +111,6 @@ export async function compareLastMonth() {
 
 export async function calculatePercentage(categoryId: number = 0) {
 	if (categoryId === 0) {
-		// Calculate percentage based on normal expenses
-		const normalExpenses = () => {
-			const expenses = readEnv('EXPENSE_');
-			let total = 0;
-			expenses.forEach(([key, value]) => {
-				total += parseInt(value as string);
-			});
-			return total;
-		};
 
 		const currentExpenses = parseInt((await calculateExpenses()).split(' ')[0]);
 		const completeness = Math.round((currentExpenses / normalExpenses()) * 100);
