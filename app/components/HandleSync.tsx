@@ -31,7 +31,7 @@ export default async function SyncExpenses({ enabled }: SyncExpensesProps) {
 				}}
 				disabled
 			>
-				<i className={'material-icons-sharp'}>thumbsup</i>
+				<i className={'material-icons-sharp'}>thumb_up</i>
 				<span>Synced</span>
 			</button >
 		)

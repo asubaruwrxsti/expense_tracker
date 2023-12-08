@@ -15,6 +15,7 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function Expenses() {
 	const categories = await prisma.categories.findMany();
 	const expenses = await prisma.expense.findMany({
+		take: 100,
 		include: {
 			Categories: true,
 		},
@@ -96,7 +97,7 @@ export default async function Expenses() {
 					</div>
 				</div>
 				<div style={{ marginBottom: '2rem' }}>
-					<RecentExpenses take={100} enableLink={false} title="All Expenses" /> {/* Show 100 recent expenses */}
+					<RecentExpenses take={100} enableLink={false} title="All Expenses this month" /> {/* Show 100 recent expenses */}
 				</div>
 			</main>
 			<RightSection />

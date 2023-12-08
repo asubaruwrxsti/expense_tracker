@@ -8,10 +8,20 @@ type ExpenseProps = {
 };
 
 export default async function RecentExpenses({ take = 5, enableLink = true, title = "Recent Expenses" }: ExpenseProps) {
+	const currentDate = new Date();
+	const startOfMonthDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
+	const endOfMonthDate = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0);
+
 	const recentExpenses = await prisma.expense.findMany({
 		take: take,
 		include: {
-			Categories: true, // Include the categories information
+			Categories: true,
+		},
+		where: {
+			createdAt: {
+				gte: startOfMonthDate,
+				lte: endOfMonthDate,
+			},
 		},
 		orderBy: {
 			createdAt: 'desc',
@@ -20,7 +30,9 @@ export default async function RecentExpenses({ take = 5, enableLink = true, titl
 
 	return (
 		<div className="recent-orders">
-			{title ? <h1>{title}</h1> : null}
+			<div style={{ marginBottom: '15px' }}>
+				{title ? <h1>{title}</h1> : null}
+			</div>
 			<table>
 				<thead>
 					<tr>
