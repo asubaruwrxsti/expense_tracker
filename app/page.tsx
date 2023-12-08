@@ -3,6 +3,7 @@ import RightSection from "@/app/components/RightSection";
 import RecentExpenses from "@/app/components/RecentExpenses";
 import { calculateExpenses, calculatePercentage, calculateBudget, compareLastMonth, calculateIncome, readEnv } from "@/utils/dashboardUtils";
 import Link from "next/link";
+import SweetAlert from "@/app/components/SweetAlert";
 
 export default async function Home() {
 	const normalExpenses = readEnv('EXPENSE') || [];

@@ -1,7 +1,7 @@
 'use client';
 import { useRouter } from 'next/navigation';
 
-interface SyncExpensesProps {
+type SyncExpensesProps = {
 	enabled: boolean;
 }
 

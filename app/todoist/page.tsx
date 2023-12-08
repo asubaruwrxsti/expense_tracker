@@ -4,6 +4,7 @@ import todoist from '@/todoist/todoist';
 import { Metadata } from "next";
 import { calculatePercentageOfNumber, parseDescription } from "@/utils/todoistUtils";
 import SyncExpenses from "@/app/components/HandleSync";
+import SweetAlert from "@/app/components/SweetAlert";
 
 export async function generateMetadata(): Promise<Metadata> {
 	return {
@@ -12,10 +13,18 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function Todoist() {
+	let hasError = {
+		status: false,
+		message: '',
+	}
+
 	const current_description: string = await todoist.getTask(process.env.TODOIST_TASK_ID as string).then(
 		(task) => task.description
 	).catch((error) => {
-		console.error(error);
+		hasError = {
+			status: true,
+			message: error.message,
+		}
 		return '';
 	});
 
@@ -41,7 +50,19 @@ export default async function Todoist() {
 					Expenses today
 				</h3>
 				<div className={'analyse'}>
-					{parseDescription(current_description).map(async (expense, index) => (
+					{hasError && <SweetAlert
+						title={'Error'}
+						text={hasError.message}
+						icon={'error'}
+						confirmButtonText={'Ok'}
+						cancelButtonText={'Cancel'}
+						confirmButtonColor={'#d33'}
+						cancelButtonColor={'#3085d6'}
+						showCancelButton={false}
+						showConfirmButton={true}
+						reverseButtons={false}
+					/>}
+					{!isEnabled && !hasError.status && parseDescription(current_description).map(async (expense, index) => (
 						<div className={'sales'} key={index}>
 							<div className={'status'}>
 								<div className={'info'}>
