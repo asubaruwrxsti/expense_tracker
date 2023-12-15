@@ -44,7 +44,7 @@ export default async function Expenses() {
 	const normalExpenses = readEnv('EXPENSE') || [];
 
 	return (
-		<Suspense fallback={<Loading />}>
+		<Suspense fallback={<Loading icon="info" />}>
 			<div className={'container'}>
 				<Sidebar active={'/expenses'} />
 				<main>
