@@ -13,6 +13,8 @@ type SweetAlertProps = {
     showCancelButton: boolean;
     showConfirmButton: boolean;
     reverseButtons: boolean;
+    onConfirm?: () => void;
+    onCancel?: () => void;
 };
 
 export default function SweetAlert({
@@ -26,8 +28,10 @@ export default function SweetAlert({
     showCancelButton,
     showConfirmButton,
     reverseButtons,
+    onConfirm,
+    onCancel,
 }: SweetAlertProps) {
-    const [result, setResult] = useState();
+    const [result, setResult] = useState<{ value?: boolean }>({});
 
     useEffect(() => {
         Swal.fire({
@@ -42,13 +46,19 @@ export default function SweetAlert({
             showConfirmButton: showConfirmButton,
             reverseButtons: reverseButtons,
         }).then((result) => {
-            console.log(result);
+            setResult(result);
+            if (result.value && onConfirm) {
+                onConfirm();
+            } else if (!result.value && onCancel) {
+                onCancel();
+            }
         });
-    }, []);
+    }, [title, text, icon, confirmButtonText, cancelButtonText, confirmButtonColor, cancelButtonColor, showCancelButton, showConfirmButton, reverseButtons, onConfirm, onCancel]);
 
     return (
         <div>
-            <p>{result}</p>
+            {/* Customize the rendering logic based on your requirements */}
+            <p>{JSON.stringify(result)}</p>
         </div>
     )
 }

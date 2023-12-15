@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import Link from 'next/link';
+import Loading from '../components/Loading';
 
 interface User {
     id: number;
@@ -8,11 +9,12 @@ interface User {
 export default async function UsersPage() {
     const res = await fetch('https://jsonplaceholder.typicode.com/users', {
         method: 'GET',
-        next: {revalidate: 10}
+        next: { revalidate: 10 }
     })
     const users: User[] = await res.json()
     return (
-            <main>
+        <main>
+            <Suspense fallback={<Loading icon="info" />}>
                 <h1>Users</h1>
                 <Link href="/">Home</Link>
                 <Link href={`/users/new`}>New User</Link>
@@ -23,6 +25,7 @@ export default async function UsersPage() {
                         </div>
                     ))}
                 </>
-            </main>
-      );
+            </Suspense>
+        </main>
+    );
 }
