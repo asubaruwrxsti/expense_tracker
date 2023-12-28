@@ -12,6 +12,7 @@ export  function parseDescription(description: string) {
 
 	const lines = description.split('\n');
 	const filtered = lines.filter((line) => line !== '');
+
 	const expenses: Expense[] = [];
 	for (let i = 0; i < filtered.length; i += 4) {
 		const expense: Expense = {

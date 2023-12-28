@@ -1,22 +1,44 @@
 'use client';
 import { useRouter } from 'next/navigation';
+import SweetAlert from "@/app/components/SweetAlert";
 
 type SyncExpensesProps = {
 	enabled: boolean;
 }
 
 export default async function SyncExpenses({ enabled }: SyncExpensesProps) {
+	const router = useRouter();
 	function handleSync() {
-		const router = useRouter();
-
 		fetch('/api/todoist', {
 			method: 'GET',
 		}).then((response) => {
 			if (response.ok) {
-				alert('Successfully synced expenses!');
-				router.push('/expenses');
+				<SweetAlert
+					title={'Success'}
+					text={'Expenses synced successfully!'}
+					icon={'success'}
+					confirmButtonText={'Ok'}
+					cancelButtonText={'Cancel'}
+					confirmButtonColor={'#d33'}
+					cancelButtonColor={'#3085d6'}
+					showCancelButton={false}
+					showConfirmButton={true}
+					reverseButtons={false}
+				/>
+				router.refresh();
 			} else {
-				alert('Error syncing expenses!');
+				<SweetAlert
+					title={'Error'}
+					text={'Error syncing expenses!'}
+					icon={'error'}
+					confirmButtonText={'Ok'}
+					cancelButtonText={'Cancel'}
+					confirmButtonColor={'#d33'}
+					cancelButtonColor={'#3085d6'}
+					showCancelButton={false}
+					showConfirmButton={true}
+					reverseButtons={false}
+				/>
 				router.refresh();
 			}
 		});

@@ -8,7 +8,6 @@ export async function GET(request: Request) {
 		const current_description = await todoist.getTask(process.env.TODOIST_TASK_ID as string).then(
 			(task) => task.description
 		).catch((error) => {
-			console.error(error);
 			return '';
 		});
 

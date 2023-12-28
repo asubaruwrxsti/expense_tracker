@@ -21,7 +21,9 @@ export default async function Todoist() {
 	}
 
 	const current_description: string = await todoist.getTask(process.env.TODOIST_TASK_ID as string).then(
-		(task) => task.description
+		(task) => {
+			return task.description
+		}
 	).catch((error) => {
 		hasError = {
 			status: true,
@@ -53,7 +55,7 @@ export default async function Todoist() {
 						Expenses today
 					</h3>
 					<div className={'analyse'}>
-						{hasError && <SweetAlert
+						{hasError.status && <SweetAlert
 							title={'Error'}
 							text={hasError.message}
 							icon={'error'}
@@ -65,7 +67,8 @@ export default async function Todoist() {
 							showConfirmButton={true}
 							reverseButtons={false}
 						/>}
-						{!isEnabled && !hasError.status && parseDescription(current_description).map(async (expense, index) => (
+						{!isEnabled && !hasError.status}
+						{parseDescription(current_description).map(async (expense, index) => (
 							<div className={'sales'} key={index}>
 								<div className={'status'}>
 									<div className={'info'}>
