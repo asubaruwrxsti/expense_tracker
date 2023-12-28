@@ -29,6 +29,9 @@ export async function GET(request: Request) {
 			});
 		}
 
+		// TODO: Find solution to either set default description
+		// or to implement a form
+		// TODO: Parse description so no invalid data is sent to the db
 		const task = await todoist.updateTask(
 			process.env.TODOIST_TASK_ID as string,
 			{
