@@ -6,8 +6,8 @@ import path from 'path';
 import fs from 'fs/promises';
 
 export async function GET(request: Request) {
-    const TOKEN_PATH = path.join(__dirname, 'token.json');
-    const CREDENTIALS_PATH = path.join(__dirname, 'client_secret.json');
+    const CREDENTIALS_PATH = path.resolve(process.cwd(), 'client_secret.json');
+    const TOKEN_PATH = path.join(process.cwd(), 'token.json');
     const SCOPES = ['https://www.googleapis.com/auth/spreadsheets'];
 
     async function loadSavedCredentialsIfExist() {
@@ -21,7 +21,7 @@ export async function GET(request: Request) {
     }
 
     async function saveCredentials(client: any) {
-        const content = (await fs.readFile(TOKEN_PATH)).toString();
+        const content = (await fs.readFile(CREDENTIALS_PATH)).toString();
         const keys = JSON.parse(content);
         const key = keys.installed || keys.web;
         const payload = JSON.stringify({
@@ -42,8 +42,12 @@ export async function GET(request: Request) {
         client = await authenticate({
           scopes: SCOPES,
           keyfilePath: CREDENTIALS_PATH,
-        });
-
+        }) as any;
+    
+        if (!client) {
+          throw new Error('Failed to authenticate client');
+        }
+    
         if (client.credentials) {
           await saveCredentials(client);
         }
@@ -63,10 +67,20 @@ export async function GET(request: Request) {
         }
         console.log('Name, Major:');
         rows.forEach((row) => {
-          // Print columns A and E, which correspond to indices 0 and 4.
-          console.log(`${row[0]}, ${row[4]}`);
+          console.log(`${row[0]}, ${row[3]}`);
+        });
+
+        return new NextResponse(JSON.stringify(rows), {
+            headers: { 'content-type': 'application/json' },
         });
     }
       
-    authorize().then(listMajors).catch(console.error);
+    return authorize()
+    .then(listMajors)
+    .catch((error) => {
+        console.error(error);
+        return new NextResponse(JSON.stringify({ error: error }), {
+            headers: { 'content-type': 'application/json' },
+        });
+    });
 }
