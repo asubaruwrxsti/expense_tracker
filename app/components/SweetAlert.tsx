@@ -1,6 +1,7 @@
 'use client';
 import Swal from 'sweetalert2';
 import React, { useEffect, useState } from 'react';
+// TODO: Fix the loading suspense fallback in the pages
 
 type SweetAlertProps = {
     title: string;
