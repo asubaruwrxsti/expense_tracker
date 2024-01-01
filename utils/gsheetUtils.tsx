@@ -18,7 +18,7 @@ export async function loadSavedCredentialsIfExist() {
     }
 }
 
-export async function saveCredentials(client) {
+export async function saveCredentials(client: any) {
     const content = await fs.readFile(CREDENTIALS_PATH);
     const keys = JSON.parse(content.toString());
     const key = keys.installed || keys.web;
@@ -39,14 +39,14 @@ export async function authorize() {
     client = await authenticate({
         scopes: SCOPES,
         keyfilePath: CREDENTIALS_PATH,
-    });
-    if (client.credentials) {
+    }) as any;
+    if (client!.credentials) {
         await saveCredentials(client);
     }
     return client;
 }
 
-export async function listMajors(auth) {
+export async function listMajors(auth: any) {
     const sheets = google.sheets({ version: 'v4', auth });
     const res = await sheets.spreadsheets.values.get({
         spreadsheetId: process.env.SPREADSHEET_ID,
