@@ -2,6 +2,7 @@ import prisma from "@/prisma/db";
 // TODO: Error handling for prisma queries
 // TODO: apply the calculations for this month only
 // TODO: migrate readEnv to reading from the database
+// TODO: Fix the percentage calculation
 
 export function readEnv(keyString: string) {
 	const envEntries = Object.entries(process.env);
@@ -22,8 +23,14 @@ export async function calculateExpenses() {
 		_sum: {
 			amount: true,
 		},
+		where: {
+			createdAt: {
+				gte: new Date(new Date().getFullYear(), new Date().getMonth(), 1),
+				lte: new Date(new Date().getFullYear(), new Date().getMonth() + 1, 0),
+			},
+		},
 	});
-	return `${expense._sum.amount} ALL`;
+	return `${expense!._sum.amount} ALL`;
 }
 
 export async function calculateBudget() {

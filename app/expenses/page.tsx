@@ -23,7 +23,7 @@ export default async function Expenses() {
 		},
 		where: {
 			createdAt: {
-				gte: new Date(new Date().setMonth(new Date().getMonth() - 1)),
+				gte: new Date(new Date().getFullYear(), new Date().getMonth(), 1),
 			},
 		},
 	});
