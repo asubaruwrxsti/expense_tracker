@@ -7,6 +7,8 @@ import SyncExpenses from "@/app/components/HandleSync";
 import SweetAlert from "@/app/components/SweetAlert";
 import { Suspense } from "react";
 import Loading from "@/app/components/Loading";
+// TODO: Fix the case when the expense is manually added from the app, it shouldnt be added to the todoist task
+// TODO: Find a solution to make the integration more user friendly, maybe even replace the integration
 
 export async function generateMetadata(): Promise<Metadata> {
 	return {
