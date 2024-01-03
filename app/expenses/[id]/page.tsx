@@ -28,7 +28,7 @@ export default async function IDExpense({ params }: Props) {
 	}) as Expense
 	return (
 		<main>
-			<Suspense fallback={<Loading />}>
+			<Suspense fallback={<Loading icon='info' />}>
 				<Link href={'/expenses'}>Back to Expenses</Link>
 				<h5>Expense {expense.description} (Where ID: {expense.id})</h5>
 				<div>
