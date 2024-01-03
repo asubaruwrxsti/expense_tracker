@@ -31,13 +31,13 @@ export async function appendSheetData(range: string, values: Expense[]) {
             range,
             valueInputOption: 'USER_ENTERED',
             requestBody: {
-                values: [
-                    values.map((value) => value.id),
-                    values.map((value) => value.name),
-                    values.map((value) => value.description),
-                    values.map((value) => value.categoriesId),
-                    values.map((value) => value.amount),
-                ]
+                values: values.map((value) => [
+                    value.id,
+                    value.name,
+                    value.description,
+                    value.categoriesId,
+                    value.amount,
+                ]),
             },
         });
         return res.data;
