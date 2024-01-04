@@ -14,6 +14,7 @@ const links: anchorLink[] = [
 	{ path: '/', text: 'Dashboard', icon: 'dashboard' },
 	{ path: '/expenses', text: 'Expenses', icon: 'receipt_long' },
 	{ path: '/todoist', text: 'Todoist', icon: 'inventory' },
+	{ path: '/gsheet', text: 'Google Sheets', icon: 'table_rows' },
 	{ path: '/reports', text: 'Reports', icon: 'report_gmailerrorred' },
 	{ path: '/users', text: 'Users', icon: 'account_circle' },
 	{ path: '/settings', text: 'Settings', icon: 'settings' },
