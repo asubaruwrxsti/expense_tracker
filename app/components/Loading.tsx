@@ -1,5 +1,5 @@
 'use client'
-import Sidebar from "@/app/components/Sidebar";
+import Sidebar from "@/app/components/LeftSection";
 import RightSection from "@/app/components/RightSection";
 import SweetAlert from "./SweetAlert";
 

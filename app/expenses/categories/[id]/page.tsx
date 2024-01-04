@@ -1,5 +1,5 @@
 import prisma from '@/prisma/db';
-import Sidebar from '@/app/components/Sidebar';
+import Sidebar from '@/app/components/LeftSection';
 import RightSection from '@/app/components/RightSection';
 import { Metadata } from "next";
 import { Suspense } from 'react';

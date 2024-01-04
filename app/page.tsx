@@ -1,4 +1,4 @@
-import Sidebar from "@/app/components/Sidebar";
+import Sidebar from "@/app/components/LeftSection";
 import RightSection from "@/app/components/RightSection";
 import RecentExpenses from "@/app/components/RecentExpenses";
 import { calculateExpenses, calculatePercentage, calculateBudget, compareLastMonth, calculateIncome, readEnv } from "@/utils/dashboardUtils";

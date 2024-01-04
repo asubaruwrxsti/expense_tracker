@@ -1,5 +1,5 @@
 import NewExpenseForm from "@/app/components/NewExpenseForm";
-import Sidebar from "@/app/components/Sidebar";
+import Sidebar from "@/app/components/LeftSection";
 import RightSection from "@/app/components/RightSection";
 import prisma from "@/prisma/db";
 import { Metadata } from "next";

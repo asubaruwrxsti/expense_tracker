@@ -1,5 +1,5 @@
 import RightSection from "@/app/components/RightSection";
-import Sidebar from "@/app/components/Sidebar";
+import Sidebar from "@/app/components/LeftSection";
 import { readEnv } from "@/utils/dashboardUtils";
 import { Metadata } from "next";
 import { Suspense } from "react";

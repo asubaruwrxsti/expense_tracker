@@ -1,5 +1,5 @@
 import prisma from "@/prisma/db";
-import Sidebar from "@/app/components/Sidebar";
+import Sidebar from "@/app/components/LeftSection";
 import RightSection from "@/app/components/RightSection";
 import { calculatePercentage, readEnv } from "@/utils/dashboardUtils";
 import RecentExpenses from "@/app/components/RecentExpenses";

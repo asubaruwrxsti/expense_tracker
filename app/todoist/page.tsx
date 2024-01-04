@@ -1,4 +1,4 @@
-import Sidebar from "@/app/components/Sidebar";
+import Sidebar from "@/app/components/LeftSection";
 import RightSection from "@/app/components/RightSection";
 import todoist from '@/todoist/todoist';
 import { Metadata } from "next";
