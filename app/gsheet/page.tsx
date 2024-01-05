@@ -22,7 +22,7 @@ export default async function gsheet() {
     }) : [];
 
     return (
-        <div className={'container'} style={{ padding: '20px' }}>
+        <div className={'container'}>
             <Sidebar active={'/gsheet'} />
             <main style={{ margin: '20px' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
