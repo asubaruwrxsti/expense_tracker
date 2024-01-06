@@ -32,7 +32,7 @@ export default function SweetAlert({
     onConfirm,
     onCancel,
 }: SweetAlertProps) {
-    const [result, setResult] = useState<{ value?: boolean }>({});
+    const [result, setResult] = useState<{ value?: boolean }>();
 
     useEffect(() => {
         Swal.fire({
